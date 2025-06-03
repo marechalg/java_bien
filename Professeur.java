@@ -6,15 +6,15 @@ public class Professeur {
     private String specialite;
     private Map<String, Integer> nbSeances;
 
-    public Professur(String nom, String prenom, String specialite) {
+    public Professeur(String nom, String prenom, String specialite) {
         this.nom = nom;
         this.prenom = prenom;
         this.specialite = specialite;
 
-        this.nbSeances["passees"] = 0;
-        this.nbSeances["futures"] = 0;
-        this.nbSeances["total"] = this.nbSeances["futur"] + this.nbSeances["passees"];
+        this.nbSeances.put("passees", 0);
+        this.nbSeances.put("futures", 0);
+        this.nbSeances.put("total", this.nbSeances.get("passees") + this.nbSeances.get("futures"));
     }
 
-    
+
 }
