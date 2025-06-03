@@ -5,16 +5,16 @@ public class Admin {
         this.professeurs = new ArrayList<>();
     }
 
-    public ajouterProfesseur(Professeur professur) throws Exception {
+    public ajouterProfesseur(Professeur professeur) throws Exception {
         if (professeur != null) {
-            if (!this.professurs.contains(professeur)) {
-                this.professeurs.add(professur);
-            } else throw new Exception("Le professur existe déjà.");
-        } else throw new Exception("Le professur est invalide.");
+            if (!this.professeurs.contains(professeur)) {
+                this.professeurs.add(professeur);
+            } else throw new Exception("Le professeur existe déjà.");
+        } else throw new Exception("Le professeur est invalide.");
     }
 
-    public retirerProf(Professur professeur) throws Exception {
-        if (this.professeur.contains(professur)) {
+    public retirerProf(Professeur professeur) throws Exception {
+        if (this.professeur.contains(professeur)) {
             
         }
     }

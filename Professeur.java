@@ -16,5 +16,5 @@ public class Professeur {
         this.nbSeances.put("total", this.nbSeances.get("passees") + this.nbSeances.get("futures"));
     }
 
-
+    
 }
