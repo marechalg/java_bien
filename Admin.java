@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Admin {
-    static private ArrayList<Professeur> professeurs;
+    private static ArrayList<Professeur> professeurs;
     
 
     public Admin() {
@@ -21,7 +21,7 @@ public class Admin {
             if (professeur != null){
                 Admin.professeurs.remove(professeur);
             } else throw new Exception("Le professeur est invalide.");
-        }else throw new Exception("Le professeur existe déjà.");
+        } else throw new Exception("Le professeur existe déjà.");
     }
 
     public void modifierProf(Professeur professeur, int index) throws Exception{
@@ -34,7 +34,7 @@ public class Admin {
     }
 
     static ArrayList<Professeur> getProfesseurs() {
-        return professeurs;
+        return Admin.professeurs;
     }
 
     public void setProfesseurs(ArrayList<Professeur> professeurs) {
@@ -43,6 +43,6 @@ public class Admin {
 
     @Override
     public String toString() {
-        return "Admin [professeurs=" + professeurs + "]";
+        return "Admin[professeurs=" + professeurs + "]";
     }
 }
