@@ -8,18 +8,23 @@ public class Disponibilite {
     public Date getHeureDebut() {
         return heureDebut;
     }
+
     public void setHeureDebut(Date heureDebut) {
         this.heureDebut = heureDebut;
     }
+
     public Date getHeureFin() {
         return heureFin;
     }
+
     public void setHeureFin(Date heureFin) {
         this.heureFin = heureFin;
     }
+
     public Date getJour() {
         return jour;
     }
+    
     public void setJour(Date jour) {
         this.jour = jour;
     }
