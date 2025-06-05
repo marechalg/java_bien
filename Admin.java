@@ -1,35 +1,44 @@
 import java.util.ArrayList;
 
 public class Admin {
-    private ArrayList<Professeur> professeurs;
+    static private ArrayList<Professeur> professeurs;
     
 
     public Admin() {
-        this.professeurs = new ArrayList<>();
+        Admin.professeurs = new ArrayList<>();
     }
 
     public void ajouterProfesseur(Professeur professeur) throws Exception {
         if (professeur != null) {
-            if (!this.professeurs.contains(professeur)) {
-                this.professeurs.add(professeur);
+            if (!Admin.professeurs.contains(professeur)) {
+                Admin.professeurs.add(professeur);
             } else throw new Exception("Le professeur existe déjà.");
         } else throw new Exception("Le professeur est invalide.");
     }
 
     public void retirerProf(Professeur professeur) throws Exception {
-        if (this.professeurs.contains(professeur)) {
+        if (Admin.professeurs.contains(professeur)) {
             if (professeur != null){
-                this.professeurs.remove(professeur);
+                Admin.professeurs.remove(professeur);
             } else throw new Exception("Le professeur est invalide.");
         }else throw new Exception("Le professeur existe déjà.");
     }
 
-    public ArrayList<Professeur> getProfesseurs() {
+    public void modifierProf(Professeur professeur, int index) throws Exception{
+        if (index >= 0){
+            if (Admin.professeurs.contains(professeur)){
+                Admin.professeurs.set(index, professeur);
+            } else throw new Exception("Le professeur n'existe pas");
+        } else throw new Exception("Erreur l'index ne peut pas être inférieur à 0.");
+        
+    }
+
+    static ArrayList<Professeur> getProfesseurs() {
         return professeurs;
     }
 
     public void setProfesseurs(ArrayList<Professeur> professeurs) {
-        this.professeurs = professeurs;
+        Admin.professeurs = professeurs;
     }
 
     @Override
