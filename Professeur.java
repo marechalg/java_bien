@@ -1,11 +1,12 @@
 import java.util.Map;
+import java.util.Date;
 
 public class Professeur {
     private String nom;
     private String prenom;
     private String specialite;
     private Map<String, Integer> nbSeances;
-
+    private Map<Date, Cours> seances;
     
 
     public Professeur(String nom, String prenom, String specialite) {
@@ -18,53 +19,14 @@ public class Professeur {
         this.nbSeances.put("total", this.nbSeances.get("passees") + this.nbSeances.get("futures"));
     }
 
-
-
-    public String getNom() {
-        return nom;
+    public void ajouterSeance(Date date, Cours cours) throws Exception {
+        Date now = new Date();
+        if (date.compareTo(now) >= 0) {
+            if (cours != null) {
+                if (!this.seances.containsKey(date)) {
+                    this.seances.put(date, cours);
+                }
+            }
+        }
     }
-
-
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-
-
-    public String getPrenom() {
-        return prenom;
-    }
-
-
-
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
-
-
-    public String getSpecialite() {
-        return specialite;
-    }
-
-
-
-    public void setSpecialite(String specialite) {
-        this.specialite = specialite;
-    }
-
-
-
-    public Map<String, Integer> getNbSeances() {
-        return nbSeances;
-    }
-
-
-
-    public void setNbSeances(Map<String, Integer> nbSeances) {
-        this.nbSeances = nbSeances;
-    }
-
-    
 }
