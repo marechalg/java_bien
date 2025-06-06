@@ -8,7 +8,7 @@ public class Admin {
         Admin.professeurs = new ArrayList<>();
     }
 
-    public void ajouterProfesseur(Professeur professeur) throws Exception {
+    public static void ajouterProfesseur(Professeur professeur) throws Exception {
         if (professeur != null) {
             if (!Admin.professeurs.contains(professeur)) {
                 Admin.professeurs.add(professeur);

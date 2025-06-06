@@ -65,4 +65,8 @@ public class Professeur {
     public String toString() {
         return "Professeur[prenom=" + this.prenom + ", nom=" + this.nom + ", specialite=" + this.specialite + ", nbSeances=" + this.nbSeances + ", seances=" + this.seances + "]";
     }
+
+    public static void main(String[] args) {
+
+    }
 }
