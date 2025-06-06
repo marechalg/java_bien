@@ -26,16 +26,18 @@ public class Professeur {
     public void ajouterSeance(Date date, Cours cours) throws Exception {
         Date now = new Date();
         if (date.compareTo(now) >= 0) {
-            boolean ok = true;
-            for (Professeur professeur : Admin.getProfesseurs()) {
-                if (professeur.seances.containsKey(date)) {
-                    ok = false;
+            if (this.specialite.equals(cours.getType())) {
+                boolean ok = true;
+                for (Professeur professeur : Admin.getProfesseurs()) {
+                    if (professeur.seances.containsKey(date)) {
+                        ok = false;
+                    }
                 }
-            }
-            if (ok) {
-                this.seances.put(date, cours);
-                this.majNbSeances();
-            } else throw new Exception("Un cours est déjà placé à cette date.");
+                if (ok) {
+                    this.seances.put(date, cours);
+                    this.majNbSeances();
+                } else throw new Exception("Un cours est déjà placé à cette date.");
+            } else throw new Exception("Le professur n'est pas adapté au cours.");
         } else throw new Exception("La date n'est pas valide");
     }
 
