@@ -66,7 +66,11 @@ public class Professeur {
         return "Professeur[prenom=" + this.prenom + ", nom=" + this.nom + ", specialite=" + this.specialite + ", nbSeances=" + this.nbSeances + ", seances=" + this.seances + "]";
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
+        Professeur prof = new Professeur("vl", "jc", "salsa hawaienne");
+        Cours cours = new Cours("salsa hawaienne", 120, "LaSalle", "intermédiaire");
+        Admin.ajouterProfesseur(prof);
+        prof.ajouterSeance(new Date(), cours);
 
     }
 }

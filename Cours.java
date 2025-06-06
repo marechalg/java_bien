@@ -2,8 +2,7 @@ import java.util.Date;
 
 public class Cours {
     private String type;
-    private Date dateDebut;
-    private String duree;
+    private int duree;
     private String lieu;
     private String niveau;
 
