@@ -14,19 +14,11 @@ public class Cours {
         this.type = type;
     }
 
-    public Date getDateDebut() {
-        return dateDebut;
-    }
-
-    public void setDateDebut(Date dateDebut) {
-        this.dateDebut = dateDebut;
-    }
-
-    public String getDuree() {
+    public int getDuree() {
         return duree;
     }
 
-    public void setDuree(String duree) {
+    public void setDuree(int duree) {
         this.duree = duree;
     }
 
@@ -46,9 +38,8 @@ public class Cours {
         this.niveau = niveau;
     }
 
-    public Cours(String type, Date dateDebut, String duree, String lieu, String niveau) {
+    public Cours(String type, int duree, String lieu, String niveau) {
         this.type = type;
-        this.dateDebut = dateDebut;
         this.duree = duree;
         this.lieu = lieu;
         this.niveau = niveau;
@@ -56,7 +47,7 @@ public class Cours {
     
     @Override
     public String toString() {
-        return "Cours [type=" + type + ", dateDebut=" + dateDebut + ", duree=" + duree + ", lieu=" + lieu + ", niveau=" + niveau + "]";
+        return "Cours [type=" + type + ", duree=" + duree + ", lieu=" + lieu + ", niveau=" + niveau + "]";
     }
     
 }

@@ -1,3 +1,4 @@
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Date;
 
@@ -14,11 +15,14 @@ public class Professeur {
         this.prenom = prenom;
         this.specialite = specialite;
 
+        this.nbSeances = new HashMap<>();
+        this.seances = new HashMap<>();
+
         this.nbSeances.put("passees", 0);
         this.nbSeances.put("futures", 0);
         this.nbSeances.put("total", this.nbSeances.get("passees") + this.nbSeances.get("futures"));
     }
-
+    // verif compatibilité
     public void ajouterSeance(Date date, Cours cours) throws Exception {
         Date now = new Date();
         if (date.compareTo(now) >= 0) {
@@ -39,9 +43,9 @@ public class Professeur {
         this.specialite = specialite;
     }
 
-    public void modifierSeance(Date date, String type, Date dateDebut, String duree, String lieu, String niveau) {
+    public void modifierSeance(Date date, String type, int duree, String lieu, String niveau) {
         this.supprimerSeance(date);
-        this.seances.put(dateDebut, new Cours(type, dateDebut, duree, lieu, niveau));
+        this.seances.put(date, new Cours(type, duree, lieu, niveau));
         this.majNbSeances();
     }
 
@@ -67,10 +71,13 @@ public class Professeur {
     }
 
     public static void main(String[] args) throws Exception {
+        Admin admin = new Admin();
         Professeur prof = new Professeur("vl", "jc", "salsa hawaienne");
         Cours cours = new Cours("salsa hawaienne", 120, "LaSalle", "intermédiaire");
         Admin.ajouterProfesseur(prof);
         prof.ajouterSeance(new Date(), cours);
-
+        System.out.println(prof);
+        prof.modifierSeance(new Date(), "caca", 90, "lasalle (de bain)", "expert");
+        System.out.println(prof);
     }
 }
