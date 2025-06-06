@@ -1,14 +1,9 @@
 import java.util.ArrayList;
 
 public class Admin {
-    private static ArrayList<Professeur> professeurs;
-    
+    static ArrayList<Professeur> professeurs = new ArrayList<>();
 
-    public Admin() {
-        Admin.professeurs = new ArrayList<>();
-    }
-
-    public static void ajouterProfesseur(Professeur professeur) throws Exception {
+    static void ajouterProfesseur(Professeur professeur) throws Exception {
         if (professeur != null) {
             if (!Admin.professeurs.contains(professeur)) {
                 Admin.professeurs.add(professeur);
@@ -16,7 +11,7 @@ public class Admin {
         } else throw new Exception("Le professeur est invalide.");
     }
 
-    public void retirerProf(Professeur professeur) throws Exception {
+    static void retirerProf(Professeur professeur) throws Exception {
         if (Admin.professeurs.contains(professeur)) {
             if (professeur != null){
                 Admin.professeurs.remove(professeur);
@@ -24,7 +19,7 @@ public class Admin {
         } else throw new Exception("Le professeur existe déjà.");
     }
 
-    public void modifierProf(Professeur professeur, int index) throws Exception{
+    static void modifierProf(Professeur professeur, int index) throws Exception{
         if (index >= 0){
             if (Admin.professeurs.contains(professeur)){
                 Admin.professeurs.set(index, professeur);
@@ -37,12 +32,7 @@ public class Admin {
         return Admin.professeurs;
     }
 
-    public void setProfesseurs(ArrayList<Professeur> professeurs) {
+    static void setProfesseurs(ArrayList<Professeur> professeurs) {
         Admin.professeurs = professeurs;
-    }
-
-    @Override
-    public String toString() {
-        return "Admin[professeurs=" + professeurs + "]";
     }
 }
