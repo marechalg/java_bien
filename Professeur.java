@@ -3,8 +3,8 @@ import java.util.Map;
 import java.util.Date;
 
 public class Professeur {
-    private String nom;
-    private String prenom;
+    private final String nom;
+    private final String prenom;
     private String specialite;
     private Map<String, Integer> nbSeances;
     private Map<Map<Date, Cours>, Professeur> seances;
@@ -31,6 +31,7 @@ public class Professeur {
                 for (Professeur professeur : Admin.getProfesseurs()) {
                     if (professeur.seances.containsKey(date)) {
                         ok = false;
+                        break;
                     }
                 }
                 if (ok) {

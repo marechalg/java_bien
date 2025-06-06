@@ -1,5 +1,3 @@
-import java.util.Date;
-
 public class Cours {
     private String type;
     private int duree;
