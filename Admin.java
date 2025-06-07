@@ -15,6 +15,8 @@ public class Admin {
         if (Admin.professeurs.contains(professeur)) {
             if (professeur != null){
                 Admin.professeurs.remove(professeur);
+                professeur = null;
+                System.gc();
             } else throw new Exception("Le professeur est invalide.");
         } else throw new Exception("Le professeur existe déjà.");
     }
