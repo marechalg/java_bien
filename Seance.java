@@ -22,6 +22,10 @@ public class Seance {
         this.cours = cours;
     }
 
+    public Cours getCours() {
+        return this.cours;
+    }
+
     public void setJour(String jour) throws Exception {
         if (this.isJour(jour.trim().toLowerCase())) {
             this.jour = jour;
