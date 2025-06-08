@@ -23,7 +23,7 @@ public class Seance {
     }
 
     public void setJour(String jour) throws Exception {
-        if (this.isJour(jour)) {
+        if (this.isJour(jour.trim().toLowerCase())) {
             this.jour = jour;
         } else throw new Exception("Le jour est invalide.");
     }
