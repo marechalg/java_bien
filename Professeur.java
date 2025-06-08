@@ -1,95 +1,66 @@
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Date;
+import java.util.ArrayList;
 
 public class Professeur {
+    private static int idInc = 0;
+
+    private final int id;
     private final String nom;
     private final String prenom;
     private String specialite;
-    private Map<String, Integer> nbSeances;
-    private Map<Map<Date, Cours>, Professeur> seances;
-    
+    private ArrayList<Seance> seances;
 
     public Professeur(String nom, String prenom, String specialite) {
+        this.id = ++Professeur.idInc;
         this.nom = nom;
         this.prenom = prenom;
         this.specialite = specialite;
-
-        this.nbSeances = new HashMap<>();
-        this.seances = new HashMap<>();
-
-        this.nbSeances.put("passees", 0);
-        this.nbSeances.put("futures", 0);
-        this.nbSeances.put("total", this.nbSeances.get("passees") + this.nbSeances.get("futures"));
-    }
-    // verif compatibilité
-    public void ajouterSeance(Date date, Cours cours) throws Exception {
-        Date now = new Date();
-        if (date.compareTo(now) >= 0) {
-            if (this.specialite.equals(cours.getType())) {
-                boolean ok = true;
-                for (Professeur professeur : Admin.getProfesseurs()) {
-                    if (professeur.seances.containsKey(date)) {
-                        ok = false;
-                        break;
-                    }
-                }
-                if (ok) {
-                    Map<Date, Cours> dateCours = new HashMap<>();
-                    dateCours.put(date, cours);
-                    this.seances.put(dateCours, this);
-                    this.majNbSeances();
-                } else throw new Exception("Un cours est déjà placé à cette date.");
-            } else throw new Exception("Le professur n'est pas adapté au cours.");
-        } else throw new Exception("La date n'est pas valide");
+        this.seances = new ArrayList<>();
     }
 
     public void setSpecialite(String specialite) {
         this.specialite = specialite;
     }
 
-    public void modifierSeance(Date date, String type, int duree, String lieu, String niveau) {
-        this.supprimerSeance(date);
-        Map<Date, Cours> dateCours = new HashMap<>();
-        dateCours.put(date, new Cours(type, duree, lieu, niveau));
-        this.seances.put(dateCours, this);
-    }
-
-    public void supprimerSeance(Date date) {
-        this.seances.remove(date);
-        this.majNbSeances();
-    }
-
-    public void majNbSeances() {
-        this.nbSeances.put("passees", 0);
-        this.nbSeances.put("futures", 0);
-        this.nbSeances.put("total", this.nbSeances.get("passees") + this.nbSeances.get("futures"));
-
-        Date now = new Date();
-        for (Map<Date, Cours> dateCours : this.seances.keySet()) {
-            for (Date date : dateCours.keySet()) {
-                if (date.compareTo(now) < 0) {
-                    this.nbSeances.put("passees", this.nbSeances.get("passees") + 1);
-                } else {
-                    this.nbSeances.put("futures", this.nbSeances.get("futures") + 1);
+    public void ajouterSeance(Seance seance) throws Exception {
+        if (seance.getCours().getType().equals(this.specialite)) {
+            boolean ok = true;
+            for (Professeur professeur : Admin.professeurs) {
+                for (Seance snc : professeur.seances) {
+                    if (snc.equals(seance)) {
+                        ok = false;
+                        break;
+                    }
                 }
+                if (!ok) break;
             }
-            this.nbSeances.put("total", this.nbSeances.get("passees") + this.nbSeances.get("futures"));
+            if (ok) {
+                this.seances.add(seance);
+            } else throw new Exception("Cette salle n'est pas disponible à ce créneau.");
+        } else throw new Exception("Le professeur n'est pas adapté au cours.");
+    }
+
+    public void modifierSeance(Seance seance, Cours cours, String jour, String heure, String lieu) throws Exception {
+        this.supprimerSeance(seance);
+        this.seances.add(new Seance(jour, heure, lieu, cours));
+    }
+
+    public void supprimerSeance(Seance seance) {
+        this.seances.remove(seance);
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        boolean result = false;
+        if (object instanceof Professeur professeur) {
+            if (professeur.id == this.id) {
+                result = true;
+            }
         }
+        return result;
     }
 
+    @Override
     public String toString() {
-        return "Professeur[prenom=" + this.prenom + ", nom=" + this.nom + ", specialite=" + this.specialite + ", nbSeances=" + this.nbSeances + "]";
-    }
-
-    public static void main(String[] args) throws Exception {
-        Admin admin = new Admin();
-        Professeur prof = new Professeur("vl", "jc", "salsa hawaienne");
-        Cours cours = new Cours("salsa hawaienne", 120, "LaSalle", "intermédiaire");
-        Admin.ajouterProfesseur(prof);
-        prof.ajouterSeance(new Date(2026, 12, 02), cours);
-        System.out.println(prof);
-        prof.modifierSeance(new Date(2027, 05, 03), "caca", 90, "lasalle (de bain)", "expert");
-        System.out.println(prof);
+        return "Professeur[prenom=" + this.prenom + ", nom=" + this.nom + ", specialite=" + this.specialite +  ", seances=" + this.seances + "]";
     }
 }
