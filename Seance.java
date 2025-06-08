@@ -7,8 +7,9 @@ public class Seance {
     private String jour;
     private String heure;
     private String lieu;
+    private Cours cours;
 
-    public Seance(String jour, String heure, String lieu) throws Exception {
+    public Seance(String jour, String heure, String lieu, Cours cours) throws Exception {
         if (this.isJour(jour)) {
             this.jour = jour;
         } else throw new Exception("Le jour est invalide.");
@@ -18,6 +19,7 @@ public class Seance {
         } else throw new Exception("L'heure est invalide.");
 
         this.lieu = lieu;
+        this.cours = cours;
     }
 
     public void setJour(String jour) throws Exception {
@@ -32,6 +34,9 @@ public class Seance {
     }
     public void setLieu(String lieu) {
         this.lieu = lieu;
+    }
+    public void setCours(Cours cours) {
+        this.cours = cours;
     }
 
     public boolean isJour(String jour) {
