@@ -8,6 +8,7 @@ public class Seance {
     private String heure;
     private String lieu;
     private Cours cours;
+    private ArrayList<Professeur> professeurs;
 
     public Seance(String jour, String heure, String lieu, Cours cours) throws Exception {
         if (this.isJour(jour)) {
@@ -20,6 +21,8 @@ public class Seance {
 
         this.lieu = lieu;
         this.cours = cours;
+
+        this.professeurs = new ArrayList<>();
     }
 
     public Cours getCours() {
@@ -31,16 +34,32 @@ public class Seance {
             this.jour = jour;
         } else throw new Exception("Le jour est invalide.");
     }
+
     public void setHeure(String heure) throws Exception {
         if (this.isHeure(heure)) {
             this.heure = heure;
         }  else throw new Exception("L'heure est invalide.");
     }
+
     public void setLieu(String lieu) {
         this.lieu = lieu;
     }
-    public void setCours(Cours cours) {
-        this.cours = cours;
+
+    public void setProfesseurs(ArrayList<Professeur> professeurs) {
+        this.professeurs = professeurs;
+    }
+
+    public void setCours(Cours cours) throws Exception {
+        boolean ok = false;
+        for (Professeur professeur : this.professeurs) {
+            if (cours.getType().equals(professeur.getSpecialite())) {
+                ok = true;
+                break;
+            }
+        }
+        if (ok) {
+            this.cours = cours;
+        } else throw new Exception("Le professur n'est pas adapté au cours.");
     }
 
     public boolean isJour(String jour) {
@@ -56,6 +75,14 @@ public class Seance {
 
     public boolean isHeure(String heure) {
         return heure.matches(HEURE);
+    }
+
+    public void ajouterProfesseur(Professeur professeur) {
+        this.professeurs.add(professeur);
+    }
+
+    public void supprimerProfesseur(Professeur professeur) {
+        this.professeurs.remove(professeur);
     }
 
     @Override

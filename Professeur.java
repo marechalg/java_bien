@@ -14,7 +14,12 @@ public class Professeur {
         this.nom = nom;
         this.prenom = prenom;
         this.specialite = specialite;
+
         this.seances = new ArrayList<>();
+    }
+
+    public String getSpecialite() {
+        return this.specialite;
     }
 
     public void setSpecialite(String specialite) {
@@ -39,9 +44,12 @@ public class Professeur {
         } else throw new Exception("Le professeur n'est pas adapté au cours.");
     }
 
-    public void modifierSeance(Seance seance, Cours cours, String jour, String heure, String lieu) throws Exception {
-        this.supprimerSeance(seance);
-        this.seances.add(new Seance(jour, heure, lieu, cours));
+    public void modifierSeance(Seance seance, Cours cours, String jour, String heure, String lieu, ArrayList<Professeur> professeurs) throws Exception {
+        seance.setCours(cours);
+        seance.setJour(jour);
+        seance.setHeure(heure);
+        seance.setLieu(lieu);
+        seance.setProfesseurs(professeurs);
     }
 
     public void supprimerSeance(Seance seance) {
