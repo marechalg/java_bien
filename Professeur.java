@@ -3,13 +3,13 @@ import java.util.ArrayList;
 public class Professeur {
     private static int idInc = 0;
 
-    private final int id;
-    private final String nom;
-    private final String prenom;
-    private String specialite;
+    private final IntegerProperty id;
+    private final StringProperty nom;
+    private final StringProperty prenom;
+    private StringProperty specialite;
     private ArrayList<Seance> seances;
 
-    public Professeur(String nom, String prenom, String specialite) {
+    public Professeur(StringProperty nom, StringProperty prenom, StringProperty specialite) {
         this.id = ++Professeur.idInc;
         this.nom = nom;
         this.prenom = prenom;
@@ -18,11 +18,11 @@ public class Professeur {
         this.seances = new ArrayList<>();
     }
 
-    public String getSpecialite() {
+    public StringProperty getSpecialite() {
         return this.specialite;
     }
 
-    public void setSpecialite(String specialite) {
+    public void setSpecialite(StringProperty specialite) {
         this.specialite = specialite;
     }
 
@@ -44,7 +44,7 @@ public class Professeur {
         } else throw new Exception("Le professeur n'est pas adapté au cours.");
     }
 
-    public void modifierSeance(Seance seance, Cours cours, String jour, String heure, String lieu, ArrayList<Professeur> professeurs) throws Exception {
+    public void modifierSeance(Seance seance, Cours cours, StringProperty jour, StringProperty heure, StringProperty lieu, ArrayList<Professeur> professeurs) throws Exception {
         seance.setCours(cours);
         seance.setJour(jour);
         seance.setHeure(heure);
@@ -68,7 +68,7 @@ public class Professeur {
     }
 
     @Override
-    public String toString() {
+    public String toStringProperty() {
         return "Professeur[prenom=" + this.prenom + ", nom=" + this.nom + ", specialite=" + this.specialite +  ", seances=" + this.seances + "]";
     }
 }
