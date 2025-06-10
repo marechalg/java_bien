@@ -1,7 +1,13 @@
+package cod;
+
 import java.util.ArrayList;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.StringProperty;
+
 public class Professeur {
-    private static int idInc = 0;
+    private static IntegerProperty idInc = new SimpleIntegerProperty(0);
 
     private final IntegerProperty id;
     private final StringProperty nom;
@@ -10,7 +16,8 @@ public class Professeur {
     private ArrayList<Seance> seances;
 
     public Professeur(StringProperty nom, StringProperty prenom, StringProperty specialite) {
-        this.id = ++Professeur.idInc;
+    	Professeur.idInc.set(idInc.get() + 1);
+        this.id = new SimpleIntegerProperty(idInc.get());
         this.nom = nom;
         this.prenom = prenom;
         this.specialite = specialite;
@@ -68,7 +75,7 @@ public class Professeur {
     }
 
     @Override
-    public String toStringProperty() {
+    public String toString() {
         return "Professeur[prenom=" + this.prenom + ", nom=" + this.nom + ", specialite=" + this.specialite +  ", seances=" + this.seances + "]";
     }
 }
