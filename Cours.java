@@ -14,7 +14,7 @@ public class Cours {
     }
     
     @Override
-    public StringProperty toString() {
+    public String toString() {
         return "Cours[type=" + this.type + ", duree=" + this.duree + ", niveau=" + this.niveau + "]";
     }
 }
