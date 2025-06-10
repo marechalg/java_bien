@@ -1,8 +1,12 @@
+package cod;
+
 import java.util.ArrayList;
 
+import javafx.beans.property.StringProperty;
+
 public class Seance {
-    private static final StringProperty[] JOURS = {"lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"};
-    private static final StringProperty HEURE = "([01]\\\\d|2[0-3]):([0-5]\\\\d)";
+    private static final String[] JOURS = {"lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"};
+    private static final String HEURE = "([01]\\\\d|2[0-3]):([0-5]\\\\d)";
 
     private StringProperty jour;
     private StringProperty heure;
@@ -11,7 +15,7 @@ public class Seance {
     private ArrayList<Professeur> professeurs;
 
     public Seance(StringProperty jour, StringProperty heure, StringProperty lieu, Cours cours) throws Exception {
-        if (this.isJour(jour)) {
+        if (this.isJour(jour.get())) {
             this.jour = jour;
         } else throw new Exception("Le jour est invalide.");
 
@@ -30,7 +34,7 @@ public class Seance {
     }
 
     public void setJour(StringProperty jour) throws Exception {
-        if (this.isJour(jour.trim().toLowerCase())) {
+        if (this.isJour(jour.get().trim().toLowerCase())) {
             this.jour = jour;
         } else throw new Exception("Le jour est invalide.");
     }
@@ -62,9 +66,9 @@ public class Seance {
         } else throw new Exception("Le professur n'est pas adapté au cours.");
     }
 
-    public boolean isJour(StringProperty jour) {
+    public boolean isJour(String jour) {
         boolean result = false;
-        for (StringProperty JOUR : JOURS) {
+        for (String JOUR : JOURS) {
             if  (jour.equals(JOUR)) {
                 result = true;
                 break;
@@ -74,7 +78,7 @@ public class Seance {
     }
 
     public boolean isHeure(StringProperty heure) {
-        return heure.matches(HEURE);
+        return heure.get().matches(HEURE);
     }
 
     public void ajouterProfesseur(Professeur professeur) {
